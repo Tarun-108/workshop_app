@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView timeText,timeDisplay;
     Button goButton;
-    int time = 0;
+    ImageView eggImage;
+    int time = 10;
 
 
     @Override
@@ -24,15 +26,30 @@ public class MainActivity extends AppCompatActivity {
         timeText = findViewById(R.id.editTextTime);
         goButton = findViewById(R.id.button);
         timeDisplay = findViewById(R.id.textViewTimeDisplay);
+        eggImage = findViewById(R.id.imageView);
 
-        CountDownTimer timer = new CountDownTimer(time*1000, 1000) {
+        CountDownTimer timer = new CountDownTimer(time*1000 + 100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+
+
+
+                String min = String.valueOf(time/60);
+                String sec = String.valueOf(time%60);
+
+                String display = min+" : "+sec;
+
+                timeDisplay.setText(display);
+
+                if(time>0) time --;
 
             }
 
             @Override
             public void onFinish() {
+
+                timeDisplay.setText("0 : 0");
+                eggImage.setImageDrawable(getDrawable(R.drawable.cracked_egg));
 
             }
         };
@@ -51,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                     String display = min+" : "+sec;
 
                     timeDisplay.setText(display);
+
+                    timer.start();
 
 
 
