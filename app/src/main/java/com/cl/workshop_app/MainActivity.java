@@ -3,6 +3,7 @@ package com.cl.workshop_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView timeText,timeDisplay;
     Button goButton;
+    int time = 0;
 
 
     @Override
@@ -23,12 +25,21 @@ public class MainActivity extends AppCompatActivity {
         goButton = findViewById(R.id.button);
         timeDisplay = findViewById(R.id.textViewTimeDisplay);
 
+        CountDownTimer timer = new CountDownTimer(time*1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int time = 0;
                 time = Integer.parseInt(timeText.getText().toString());
 
                 if(time==0) {
@@ -41,15 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
                     timeDisplay.setText(display);
 
+
+
                 }
 
             }
         });
-
-
-
-
-
-
     }
 }
