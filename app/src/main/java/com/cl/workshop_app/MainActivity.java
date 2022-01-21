@@ -56,15 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
                             int counter = (int) (millisUntilFinished/1000);
 
-
                             String min = String.valueOf(counter/60);
                             String sec = String.valueOf(counter%60);
 
                             String display = min+" : "+sec;
 
                             timeDisplay.setText(display);
-
-                            if(counter>0) counter --;
 
                         }
 
@@ -76,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                             eggImage.setImageDrawable(getDrawable(R.drawable.cracked_egg));
 
                         }
-                    }.start();
+                    };
+                    timer.start();
 
 
 
