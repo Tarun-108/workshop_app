@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -57,11 +58,16 @@ public class MainActivity extends AppCompatActivity {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                time = Integer.parseInt(timeText.getText().toString());
 
-                if(time==0) {
+                if(TextUtils.isEmpty(timeText.getText())) {
                     Toast.makeText(MainActivity.this, "Enter time", Toast.LENGTH_SHORT).show();
                 }else{
+
+
+                    eggImage.setImageDrawable(getDrawable(R.drawable.egg));
+
+                    time = Integer.parseInt(timeText.getText().toString());
+
                     String min = String.valueOf(time/60);
                     String sec = String.valueOf(time%60);
 
