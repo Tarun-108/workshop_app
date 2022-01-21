@@ -2,6 +2,7 @@ package com.cl.workshop_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -16,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     TextView timeText,timeDisplay;
     Button goButton;
     ImageView eggImage;
-    int time = 10;
 
 
     @Override
@@ -29,31 +29,6 @@ public class MainActivity extends AppCompatActivity {
         timeDisplay = findViewById(R.id.textViewTimeDisplay);
         eggImage = findViewById(R.id.imageView);
 
-        CountDownTimer timer = new CountDownTimer(time*1000 + 100, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-
-
-                String min = String.valueOf(time/60);
-                String sec = String.valueOf(time%60);
-
-                String display = min+" : "+sec;
-
-                timeDisplay.setText(display);
-
-                if(time>0) time --;
-
-            }
-
-            @Override
-            public void onFinish() {
-
-                timeDisplay.setText("0 : 0");
-                eggImage.setImageDrawable(getDrawable(R.drawable.cracked_egg));
-
-            }
-        };
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                     eggImage.setImageDrawable(getDrawable(R.drawable.egg));
 
-                    time = Integer.parseInt(timeText.getText().toString());
+                    int time = Integer.parseInt(timeText.getText().toString());
 
                     String min = String.valueOf(time/60);
                     String sec = String.valueOf(time%60);
@@ -75,7 +50,34 @@ public class MainActivity extends AppCompatActivity {
 
                     timeDisplay.setText(display);
 
-                    timer.start();
+                    CountDownTimer timer = new CountDownTimer(time* 1000L + 100, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                            int counter = (int) (millisUntilFinished/1000);
+
+
+                            String min = String.valueOf(counter/60);
+                            String sec = String.valueOf(counter%60);
+
+                            String display = min+" : "+sec;
+
+                            timeDisplay.setText(display);
+
+                            if(counter>0) counter --;
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+
+                            timeDisplay.setText("0 : 0");
+                            MediaPlayer.create(MainActivity.this,R.raw.frying_pan_hit).start();
+                            eggImage.setImageDrawable(getDrawable(R.drawable.cracked_egg));
+
+                        }
+                    }.start();
+
 
 
 
