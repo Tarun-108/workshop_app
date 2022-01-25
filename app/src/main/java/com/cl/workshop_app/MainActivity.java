@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button goButton;
     ImageView eggImage;
 
+    CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
                     timeDisplay.setText(display);
 
-                    CountDownTimer timer = new CountDownTimer(time* 1000L + 100, 1000) {
+                    if(timer != null){
+                        timer.cancel();
+                    }
+
+                    timer = new CountDownTimer(time* 1000L + 100, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
 
