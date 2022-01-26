@@ -37,6 +37,8 @@
         android:layout_marginTop="40dp"
         android:ems="5"
         android:textColor="@color/black"
+        android:hint="Enter time"
+        android:textColorHint="#5E5E5E"
         android:inputType="number"
         android:minHeight="48dp"
         android:paddingStart="10dp"
